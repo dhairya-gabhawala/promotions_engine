@@ -14,6 +14,13 @@ class ConditionsController < ApplicationController
     end
 
     def create
+        @condition= Condition.new(condition_params)
+        @condition.promotion = @promotion
+        if @condition.save!
+            redirect_to property_promotion_conditions_path(@property, @promotion), notice: "Condition was successfully created."
+        else
+            render :index, status: :unprocessable_entity, alert: "There were some errors saving the conditions."
+        end
     end
 
     def edit

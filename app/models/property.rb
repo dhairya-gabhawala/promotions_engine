@@ -8,6 +8,7 @@ class Property < ApplicationRecord
     validates_uniqueness_of :name, :api_key, :secret
 
     before_create :generate_tokens
+    after_create :default_variables
 
     def generate_tokens
         self.api_key = "PE-#{(SecureRandom.random_number(9e9)+1e7).to_i}"

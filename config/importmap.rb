@@ -8,3 +8,5 @@ pin_all_from "app/javascript/controllers", under: "controllers"
 pin "@stimulus-components/rails-nested-form", to: "@stimulus-components--rails-nested-form.js" # @5.0.0
 pin "@stimulus-components/dropdown", to: "@stimulus-components--dropdown.js" # @3.0.0
 pin "stimulus-use" # @0.52.2
+pin "trix"
+pin "@rails/actiontext", to: "actiontext.esm.js"

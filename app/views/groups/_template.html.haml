@@ -3,6 +3,6 @@
         %div{class: "absolute inset-0 flex items-center", "aria-hidden": true}
             %div{class: "w-full border-t border-gray-300"}
         %div{class: "relative flex justify-center"}
-            %span{class: "bg-white px-2 text-sm text-gray-500 condition-by"} #{condition.by}
+            %span{class: "bg-white px-2 text-sm text-gray-500 condition-by"} #{condition.by || "AND"}
     = f.fields_for :groups, Group.new, child_index: "NEW_RECORD" do |group_fields|
         = render partial: "groups/form", locals: {f: group_fields}

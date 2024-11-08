@@ -23,7 +23,7 @@
             %small.text-gray-600
                 Short description of the promo prior to clicking learn more.
             %div.mt-2
-                = f.text_area :short_description, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm/6", rows: 3
+                = f.rich_text_area :short_description, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm/6", rows: 3
             - if promotion.errors.any? && promotion.errors[:short_description]
                 %p{class: "mt-2 text-sm text-red-600", id: "name-error"}
                     Short description cannot be blank.
@@ -32,7 +32,7 @@
             %small.text-gray-600
                 Detailed description to present after clicking learn more.
             %div.mt-2
-                = f.text_area :description, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm/6", rows: 3
+                = f.rich_text_area :description, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm/6", rows: 3
             - if promotion.errors.any? && promotion.errors[:description]
                 %p{class: "mt-2 text-sm text-red-600", id: "name-error"}
                     Description cannot be blank.

@@ -4,16 +4,16 @@
             %div{class: "absolute inset-0 flex items-center", "aria-hidden": true}
                 %div{class: "w-full border-t border-gray-300"}
             %div{class: "relative flex justify-center"}
-                %span{class: "bg-white px-2 text-sm text-gray-500 condition-by"} #{f.options[:parent_builder].object.by}
+                %span{class: "bg-white px-2 text-sm text-gray-500 condition-by"} #{f.options[:parent_builder].object.by || "AND"}
     %div{ class: "relative rounded border border-dashed border-gray-950 p-2"}
         %div{class: "flex gap-2 justify-end items-center", data: {controller: "logicby"}}
-            %button{data:{action: "nested-form#add"}, class: "text-sm cursor-pointer px-4 py-[calc(theme(spacing.2)-1px)] rounded-full border border-transparent bg-gray-950 shadow-sm whitespace-nowrap text-base font-medium text-white disabled:bg-gray-950 hover:bg-gray-800 disabled:opacity-40"} Add Operation
             = f.select :by, Group::BY, {}, {class: "rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-gray-900 focus:outline-none focus:ring-gray-900 sm:text-sm", data:{action: "logicby#updateDividers", target: ".group-by"}}
             %button.rounded-full.bg-gray-950.p-1.text-white.shadow-sm.hover:bg-gray-600.focus-visible:outline.focus-visible:outline-2.focus-visible:outline-offset-2.focus-visible:outline-indigo-600{type: "button", data:{action: "nested-form#remove"}}
                 %svg.h-5.w-5{fill: "none", stroke: "currentColor", "stroke-width" => "1.5", viewbox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg"}
                     %path{d: "M6 18 18 6M6 6l12 12", "stroke-linecap" => "round", "stroke-linejoin" => "round"}
             = f.hidden_field :_destroy
         %div{data: {controller: "nested-form", nested_form_wrapper_selector_value: ".nested-operation-form-wrapper"}}
+            %button{data:{action: "nested-form#add"}, class: "absolute top-2 right-36 text-sm cursor-pointer px-4 py-[calc(theme(spacing.2)-1px)] rounded-full border border-transparent bg-gray-950 shadow-sm whitespace-nowrap text-base font-medium text-white disabled:bg-gray-950 hover:bg-gray-800 disabled:opacity-40"} Add Operation
             = f.fields_for :operations, (f.object.operations.any? ? f.object.operations : f.object.operations.build) do |operation|
                 = render partial: "operations/form", locals: {f: operation}
             %div{data:{"nested-form-target": "target"}}

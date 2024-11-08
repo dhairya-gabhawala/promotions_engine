@@ -7,6 +7,7 @@ class PropertiesController < ApplicationController
     end
     
     def show
+     session[:property_id] = @property.id
     end
 
     def new

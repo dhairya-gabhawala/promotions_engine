@@ -7,8 +7,10 @@ class Api::V1::PromotionsController < Api::ApplicationController
         @promotions = []
         if promotions
             promotions.each do |p|
-                if params[:skus] && p.products.any?
-                    if (p.includes_products?(params[:skus]).empty? && (params[:skus].split(",").length === p.excludes_products?(params[:skus]).length))
+                if p.products.any?
+                    if(params[:skus].nil?)
+																								next
+																				elsif (p.included_products.any? && p.includes_products?(params[:skus]).empty?) || (p.excluded_products.any? && !p.excludes_products?(params[:skus]).empty?)
                         next
                     end
                 end

@@ -39,5 +39,6 @@
 			= @promotion.description
 	%div{class: "pb-3 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"}
 		= render partial: "conditions/products_display", locals: {products: @products}
-	%div{class: "pb-3 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"}
-		= render partial: "conditions/condition", locals: {condition: @promotion.condition}
+	- if @promotion.condition
+		%div{class: "pb-3 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"}
+			= render partial: "conditions/condition", locals: {condition: @promotion.condition}

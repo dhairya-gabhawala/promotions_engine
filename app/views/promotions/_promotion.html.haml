@@ -8,7 +8,7 @@
             #{promotion.short_description}
         - if (promotion.start || promotion.end)
             %div{class: "mt-1 flex items-center gap-x-2 text-xs/5 text-gray-500"}
-                #{promotion.start ? promotion.start.strftime("%b %d, %Y") : "Publish Date"} to #{promotion.end.strftime("%b %d, %Y")}
+                #{promotion.start ? promotion.start.strftime("%b %d, %Y") : "Publish Date"} to #{promotion.end ? promotion.end.strftime("%b %d, %Y") : ""}
     %div
         %div{class: "mt-1 flex items-center gap-x-1.5"}
             - case promotion.status

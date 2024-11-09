@@ -21,11 +21,11 @@ class Promotion < ApplicationRecord
     end
 
     def includes_products?(skus)
-        products.includes(:products_promotions).where("products_promotions.relationship": :include, sku: skus.split(","))
+        products.where("products_promotions.relationship = 'include' AND products.sku IN (#{skus})")
     end
 
     def excludes_products?(skus)
-        products.includes(:products_promotions).where("products_promotions.relationship": :exclude, sku: skus.split(","))
+        products.where("products_promotions.relationship = 'exclude' AND products.sku IN (#{skus})")
     end
 
 end

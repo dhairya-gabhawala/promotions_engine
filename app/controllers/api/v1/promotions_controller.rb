@@ -1,28 +1,39 @@
 class Api::V1::PromotionsController < Api::ApplicationController
 
-    # If no parameters provided, all promotions will be returned.
     def index
         current_date = Date.strptime(params[:current_date], "%m/%d/%Y")
         promotions = @property.promotions.where(status: :active, start: [nil, ...current_date], end: [nil, current_date...]).order(rank: :asc)
         @promotions = []
         if promotions
-            promotions.each do |p|
-                if p.products.any?
-                    if(params[:skus].nil?)
-																								next
-																				elsif (p.included_products.any? && p.includes_products?(params[:skus]).empty?) || (p.excluded_products.any? && !p.excludes_products?(params[:skus]).empty?)
-                        next
+        	promotions.each do |p|
+
+                if !params[:skus] && p.included_products.any?
+                    next
+                end
+
+                if params[:skus]
+                    skus = params[:skus].split(",").map{|s| "'#{s}'"}
+
+                    if p.excluded_products.any?
+                        next if p.excludes_products?(skus.join(",")).length === skus.length
+                    end
+
+                    if p.included_products.any?
+                        next if p.includes_products?(skus.join(",")).empty?
                     end
                 end
-                if p.condition
-                    rulio = p.condition.to_rulio(params)
-                    if rulio.execute
-                        @promotions.push(p)
-                    end
-                else
-                    @promotions.push(p)
-                end
-            end
+
+        		if p.condition
+        			rulio = p.condition.to_rulio(params)
+        			if rulio.execute
+        				@promotions.push(p)
+        			else
+        				next
+        			end
+        		else
+        			@promotions.push(p)
+        		end
+        	end
         end
 
         respond_to do |format|

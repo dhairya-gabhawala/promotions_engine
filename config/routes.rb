@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :promotions, only: [:index, :show]
+      get :status, to: "promotions#status"
     end
   end
 
